@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pokedex_dvm/screens/attributes_page.dart';
 import 'package:pokedex_dvm/widgets/add_card_for_pokedex.dart';
+import 'package:pokedex_dvm/widgets/filter_dialog.dart';
 
 class Pokedex extends StatefulWidget {
   const Pokedex({Key? key}) : super(key: key);
@@ -31,23 +33,52 @@ class _PokedexState extends State<Pokedex> {
             ),
           ),
         ),
-        body: Container(
-          margin: const EdgeInsets.fromLTRB(60, 80, 60, 0),
-          child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AttributesPage(),
-                      ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 31.h,
+              ),
+              Container(
+                height: 24.h,
+                width: 240.w,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                  color: Color.fromRGBO(204, 204, 204, 1),
+                ),
+                child: const TextField(
+                  cursorColor: Colors.black,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.search_rounded,
+                      color: Colors.black,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 31.h,
+              ),
+              ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AttributesPage(),
+                          ),
+                        );
+                      },
+                      child: PokemonCard(index: index),
                     );
-                  },
-                  child: AddCardPokedex(i: index),
-                );
-              }),
+                  }),
+            ],
+          ),
         ),
       ),
     );

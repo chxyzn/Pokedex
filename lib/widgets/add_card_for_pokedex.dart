@@ -1,90 +1,122 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AddCardPokedex extends StatelessWidget {
-  final int i;
-  const AddCardPokedex({super.key, required this.i});
+class PokemonCard extends StatelessWidget {
+  final int index;
+  const PokemonCard({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      color: Colors.black,
-      child: SizedBox(
-        height: 140,
-        width: 270,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 18,
-                ),
-                Text(
-                  '#00$i',
-                  style: const TextStyle(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 14,
+    return Stack(
+      alignment: AlignmentDirectional.topEnd,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(bottom: 32.h),
+          child: Container(
+            height: 140.h,
+            width: 270.w,
+            margin: EdgeInsets.symmetric(horizontal: 60.w),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              color: Colors.black,
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(top: 18.0.h, left: 28.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  indexText(index),
+                  SizedBox(
+                    height: 13.h,
                   ),
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 34,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          'Bulbasaur',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Roboto',
-                            fontSize: 20,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 7.w,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            'Bulbasaur',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Roboto',
+                                fontSize: 20.h,
+                                fontWeight: FontWeight.w500),
                           ),
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 10,
-                              backgroundImage: NetworkImage(
-                                  'https://static.wikia.nocookie.net/pokemonfanon/images/3/35/Gen8-Grass.png/revision/latest?cb=20201110231712'),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            CircleAvatar(
-                              radius: 10,
-                              backgroundImage: NetworkImage(
-                                  'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Pok%C3%A9mon_Poison_Type_Icon.svg/2048px-Pok%C3%A9mon_Poison_Type_Icon.svg.png'),
-                            )
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                )
-              ],
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 10.h.w,
+                                backgroundImage: const NetworkImage(
+                                    'https://static.wikia.nocookie.net/pokemonfanon/images/3/35/Gen8-Grass.png/revision/latest?cb=20201110231712'),
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              CircleAvatar(
+                                radius: 10.h.w,
+                                backgroundImage: const NetworkImage(
+                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Pok%C3%A9mon_Poison_Type_Icon.svg/2048px-Pok%C3%A9mon_Poison_Type_Icon.svg.png'),
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
-            const SizedBox(
-              width: 20,
-            ),
-            Image.asset(
-              'images/bulba.png',
-              height: 136,
-              width: 136,
-            ),
-          ],
+          ),
         ),
-      ),
+        Padding(
+          padding: EdgeInsets.only(right: 32.0.w),
+          child: Image.asset(
+            'images/bulba.png',
+            height: 136.h,
+            width: 136.w,
+          ),
+        ),
+      ],
     );
+  }
+
+  Text indexText(int index) {
+    if (index < 10) {
+      return Text(
+        '#00${index + 1}',
+        style: TextStyle(
+            fontFamily: 'Roboto',
+            color: Colors.white,
+            fontSize: 14.h,
+            fontWeight: FontWeight.w400),
+      );
+    } else {
+      if (index < 100) {
+        return Text(
+          '#0${index + 1}',
+          style: TextStyle(
+              fontFamily: 'Roboto',
+              color: Colors.white,
+              fontSize: 14.h,
+              fontWeight: FontWeight.w400),
+        );
+      } else {
+        return Text(
+          '#${index + 1}',
+          style: TextStyle(
+              fontFamily: 'Roboto',
+              color: Colors.white,
+              fontSize: 14.h,
+              fontWeight: FontWeight.w400),
+        );
+      }
+    }
   }
 }
