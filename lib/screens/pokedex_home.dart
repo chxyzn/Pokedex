@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pokedex_dvm/screens/attributes_page.dart';
-import 'package:pokedex_dvm/widgets/add_card_for_pokedex.dart';
-import 'package:pokedex_dvm/widgets/filter_dialog.dart';
+import 'package:pokedex_dvm/widgets/pokemon_card.dart';
 
 class Pokedex extends StatefulWidget {
   const Pokedex({Key? key}) : super(key: key);
